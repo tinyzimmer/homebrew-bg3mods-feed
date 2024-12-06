@@ -5,26 +5,26 @@
 class Bg3modsFeed < Formula
   desc "A feed generator of mods for Baldur's Gate 3"
   homepage "https://github.com/tinyzimmer/bg3mods-feed"
-  version "0.0.3"
+  version "0.0.4"
   license "MIT"
 
   on_macos do
     on_intel do
-      url "https://github.com/tinyzimmer/bg3mods-feed/releases/download/v0.0.3/bg3mods-feed_Darwin_x86_64.tar.gz"
-      sha256 "a04827a6d85422c04474e0feb62e700da933731bd3a580067d59eb1c899a784c"
+      url "https://github.com/tinyzimmer/bg3mods-feed/releases/download/v0.0.4/bg3mods-feed_Darwin_x86_64.tar.gz"
+      sha256 "803797313cbc6ecad3f60acfda1fe8178f2641f22f098285df633a7c39633646"
 
       def install
         bin.install "bg3mods-feed"
-        pkgetc.install "contrib/etc/config.yaml" => "bg3mods-feed.conf.yaml" if !File.exist?(pkgetc/"bg3mods-feed.conf.yaml")
+        etc.install "contrib/etc/config.yaml" => "bg3mods-feed.conf.yaml" if !File.exist?(etc/"bg3mods-feed.conf.yaml")
       end
     end
     on_arm do
-      url "https://github.com/tinyzimmer/bg3mods-feed/releases/download/v0.0.3/bg3mods-feed_Darwin_arm64.tar.gz"
-      sha256 "02b8a37098b4f1b8693c21f3fa4498e3dc507c2077363ba2a15821c1fd883128"
+      url "https://github.com/tinyzimmer/bg3mods-feed/releases/download/v0.0.4/bg3mods-feed_Darwin_arm64.tar.gz"
+      sha256 "17807f267923c8c0d51c54637790ab839ee1d2282a377feba5019aa3c3f62fe1"
 
       def install
         bin.install "bg3mods-feed"
-        pkgetc.install "contrib/etc/config.yaml" => "bg3mods-feed.conf.yaml" if !File.exist?(pkgetc/"bg3mods-feed.conf.yaml")
+        etc.install "contrib/etc/config.yaml" => "bg3mods-feed.conf.yaml" if !File.exist?(etc/"bg3mods-feed.conf.yaml")
       end
     end
   end
@@ -32,23 +32,23 @@ class Bg3modsFeed < Formula
   on_linux do
     on_intel do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/tinyzimmer/bg3mods-feed/releases/download/v0.0.3/bg3mods-feed_Linux_x86_64.tar.gz"
-        sha256 "6d69289df08eab97f52b1c7ac353231c6629f6caf964c87c351ac1f6430dcd30"
+        url "https://github.com/tinyzimmer/bg3mods-feed/releases/download/v0.0.4/bg3mods-feed_Linux_x86_64.tar.gz"
+        sha256 "b73bd5e4d1ac1d1b7f5519c3df2200ea52b7b3b9716a48204ab638fd5f1d9575"
 
         def install
           bin.install "bg3mods-feed"
-          pkgetc.install "contrib/etc/config.yaml" => "bg3mods-feed.conf.yaml" if !File.exist?(pkgetc/"bg3mods-feed.conf.yaml")
+          etc.install "contrib/etc/config.yaml" => "bg3mods-feed.conf.yaml" if !File.exist?(etc/"bg3mods-feed.conf.yaml")
         end
       end
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/tinyzimmer/bg3mods-feed/releases/download/v0.0.3/bg3mods-feed_Linux_arm64.tar.gz"
-        sha256 "1f82d15d9a90d5e4fde9ab65cb23fda431256c1d8e17b05a63b3b6e935503bf3"
+        url "https://github.com/tinyzimmer/bg3mods-feed/releases/download/v0.0.4/bg3mods-feed_Linux_arm64.tar.gz"
+        sha256 "750a6cc218c33056554f31aded39745be6908546fde597bb2fef461189dc1817"
 
         def install
           bin.install "bg3mods-feed"
-          pkgetc.install "contrib/etc/config.yaml" => "bg3mods-feed.conf.yaml" if !File.exist?(pkgetc/"bg3mods-feed.conf.yaml")
+          etc.install "contrib/etc/config.yaml" => "bg3mods-feed.conf.yaml" if !File.exist?(etc/"bg3mods-feed.conf.yaml")
         end
       end
     end
@@ -57,12 +57,12 @@ class Bg3modsFeed < Formula
   def caveats
     <<~EOS
       You can start the service with `brew services start bg3mods-feed`.
-      The service will be available at http://localhost:8080/feed unless otherwise configured in #{pkgetc}/bg3mods-feed.conf.yaml.
+      The service will be available at http://localhost:8080/feed unless otherwise configured in #{etc}/bg3mods-feed.conf.yaml.
     EOS
   end
 
   service do
-    run [bin/"bg3mods-feed", "--config", pkgetc/"bg3mods-feed.conf.yaml"]
+    run [bin/"bg3mods-feed", "--config", etc/"bg3mods-feed.conf.yaml"]
     keep_alive true
   end
 
